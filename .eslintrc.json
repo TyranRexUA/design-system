@@ -9,11 +9,15 @@
     "airbnb",
     "plugin:import/typescript"
   ],
+  "plugins": [
+    "react-hooks"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
+    "react-hooks/exhaustive-deps": "error",
     "react/react-in-jsx-scope": 0,
     "react/jsx-props-no-spreading": ["error", {"exceptions": ["AuthComponent", "Component"]}],
     "react/function-component-definition": [2, {
