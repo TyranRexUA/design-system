@@ -7,6 +7,7 @@ import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import url from 'postcss-url';
+import del from 'rollup-plugin-delete';
 
 const packageJson = require('./package.json');
 
@@ -26,11 +27,17 @@ export default [
       },
     ],
     plugins: [
+      del({ targets: 'dist' }),
       peerDepsExternal(),
       image(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: './tsconfig.json', sourceMap: true, inlineSources: true }),
+      typescript({
+        tsconfig: './tsconfig.json',
+        sourceMap: true,
+        inlineSources: true,
+        exclude: ['**/*.stories.tsx', '**/*.test.tsx']
+      }),
       postcss({
         plugins: [
           url({
@@ -40,6 +47,7 @@ export default [
       }),
       terser(),
     ],
+    external: ['react', 'react-dom'],
   },
   {
     input: 'dist/esm/types/index.d.ts',
