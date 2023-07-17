@@ -51,7 +51,16 @@
     {
       "files": ["**/*.stories.*"],
       "rules": {
-        "react/jsx-props-no-spreading": 0
+        "react/jsx-props-no-spreading": 0,
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": [
+              "**/*.stories.*",
+              "**/.storybook/**/*.*"
+            ]
+          }
+        ]
       }
     }
   ]
